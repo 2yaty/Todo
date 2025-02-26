@@ -35,7 +35,6 @@ public class TokenService {
                 .issuer("self")
                 .issuedAt(now) //TODO: add the token expiration date here
                 .subject(auth.getName())
-                .claim("firstName", userService.findByUsername(auth.getName()).getFirstName())
                 .claim("roles", scope)
                 .build();
 
