@@ -32,24 +32,24 @@ public class AuthService {
 
     public AuthResponse authenticate(AuthRequest request) {
         Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+                new UsernamePasswordAuthenticationToken(request.getMail(), request.getPassword()));
         String token = jwtUtil.generateJwt(auth);
         return new AuthResponse(token);
     }
 
     public AuthResponse register(RegisterRequest request) {
-        if (userService.existsByUsername(request.getUsername())) {
+        if (userService.existsByUsername(request.getMail())) {
             throw new RuntimeException("Username already taken");
         }
 
         User user = new User();
-        user.setLastName(request.getPhone());
-        user.setUsername(request.getUsername());
+        user.setPhone(request.getPhone());
+        user.setMail(request.getMail());
         user.setPassword(request.getPassword());
         userService.registerUser(user);
 
         Authentication auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+                new UsernamePasswordAuthenticationToken(request.getMail(), request.getPassword()));
         String token = jwtUtil.generateJwt(auth);
         return new AuthResponse(token);
     }
