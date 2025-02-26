@@ -21,14 +21,12 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String firstName;
+    @Column(unique = true,nullable = false)
+    private String phone;
 
-    private String lastName;
-
-    @Email
+    @Email(regexp = ".*@gmail\\.com$", message = "Email must be a valid Gmail address")
     @Column(nullable = false, unique = true)
-    private String username;
+    private String mail;
 
     @Column(nullable = false)
     private String password;
@@ -40,6 +38,11 @@ public class User implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
+    }
+
+    @Override
+    public String getUsername() {
+        return mail;
     }
 
     @Override
