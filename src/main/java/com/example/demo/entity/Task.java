@@ -1,9 +1,11 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.time.LocalDateTime;
 
+@Data
 @Entity
 @Table(name = "tasks")
 public class Task {
@@ -25,7 +27,7 @@ public class Task {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    public enum TaskStatus {
+    public static enum TaskStatus {
         PENDING, DONE;
     }
 
