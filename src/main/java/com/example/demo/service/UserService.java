@@ -22,11 +22,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public boolean existsByUsername(String username) {
-        return userRepository.existsByUsername(username);
+
+
+    public User findByEmail(String email) {
+        return userRepository.findByMail(email).orElseThrow();
     }
 
-    public User findByUsername(String username){
-        return userRepository.findByUsername(username).orElseThrow();
+    public boolean existsByMail (String mail) {
+        return userRepository.existsByMail(mail);
     }
 }

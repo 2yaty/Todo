@@ -38,7 +38,7 @@ public class AuthService {
     }
 
     public AuthResponse register(RegisterRequest request) {
-        if (userService.existsByUsername(request.getMail())) {
+        if (userService.existsByMail(request.getMail())) {
             throw new RuntimeException("Username already taken");
         }
 
